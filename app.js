@@ -5,20 +5,26 @@ var tictacpro = angular.module('tictacpro', ['ui.router', 'firebase']);
 tictacpro.config(['$stateProvider', '$urlRouterProvider', 
     function ($stateProvider, $urlRouterProvider) {
     $stateProvider
+        .state('loginParent',{
+            templateUrl: "views/loginParent.html"
+        })
         .state('login',{
             url:'/login',
             templateUrl: "views/login.html",
-            controller: 'loginCtrl'
+            controller: 'loginCtrl',
+            parent: 'loginParent'
         })
         .state('forgotPassword',{
             url:'/forgotPassword',
             templateUrl: "views/forgotPassword.html",
-            controller: 'loginCtrl'
+            controller: 'loginCtrl',
+            parent: 'loginParent'
         })
         .state('createAccount',{
             url:'/createAccount',
             templateUrl: "views/createAccount.html",
-            controller: 'loginCtrl'
+            controller: 'loginCtrl',
+            parent: 'loginParent'
         })
         .state('main',{
             url:'/',

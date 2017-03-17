@@ -1,10 +1,10 @@
-<div class="login">
-	<form>
-		<input ng-model="email" type="email" placeholder="Email">
-		<input ng-model="password" type="password" placeholder="Password">
-		<button ng-click="createAccount(email, password)" ng-disabled="currentUser">Create Account</button>
-		<p>{{loginMessage}}</p>
-	</form>
+<div class="errorMessage">
 	<p ng-show="currentUser">You are already logged in! <a ui-sref="main">Play Tic Tac Pro</a></p>
-	<a ui-sref="login">&lt;&lt; Back</a>
+	<p ng-show="loginMessage">{{ loginMessage }}</p>
 </div>
+<form>
+	<p><input ng-model="email" type="email" placeholder="Email" autocomplete="off"></p>
+	<p><input ng-model="password" type="password" placeholder="Password"></p>
+	<p><button ng-click="createAccount(email, password)" ng-disabled="currentUser">Create Account</button></p>
+	<a ui-sref="login">&lt; Back</a>
+</form>
