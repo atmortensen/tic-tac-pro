@@ -2,10 +2,11 @@
 	<form>
 		<input ng-model="email" type="email" name="email" placeholder="Email">
 		<input ng-model="password" type="password" name="password" placeholder="Password">
-		<button ng-click="login(email, password)">Login</button>
-		<button ng-click="guestLogin()">Login as Guest</button>
+		<button ng-click="login(email, password)" ng-disabled="currentUser">Login</button>
+		<button ng-click="guestLogin()" ng-disabled="currentUser">Login as Guest</button>
 		<a ui-sref="createAccount">Create Account</a>
 		<a ui-sref="forgotPassword">Forgot Password</a>
+		<p ng-show="currentUser">You are already logged in! <a ui-sref="main">Play Tic Tac Pro</a></p>
 		<p>{{ loginMessage }}</p>
 	</form>
 </div>

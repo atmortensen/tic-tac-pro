@@ -1,5 +1,12 @@
 // CONTROLLER
-tictacpro.controller('loginCtrl', ['$scope', 'loginService', '$state', function($scope, loginService, $state){
+tictacpro.controller('loginCtrl', ['$scope', '$firebaseAuth', 'loginService', '$state', 
+	function($scope, $firebaseAuth, loginService, $state){
+
+
+	// MAKE SURE WE'RE NOT ALREADY LOGGED ON
+	$firebaseAuth().$onAuthStateChanged(function(firebaseUser) {
+	    $scope.currentUser = firebaseUser;
+  	});
 
 	// GET LOGIN MESSAGE 
 	$scope.getMessage = function(){

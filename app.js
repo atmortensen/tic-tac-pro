@@ -43,14 +43,6 @@ tictacpro.run(["$rootScope", "$state", function($rootScope, $state) {
       $state.go("login");
     }
   });
-
-  $rootScope.$on("$stateChangeSuccess", function(event, toState, toParams, fromState, fromParams) {
-    setTimeout(function(){
-        console.log($rootScope.firebaseUser)
-        if($rootScope.firebaseUser && toState.controller === "loginCtrl"){
-            console.log('here')
-        }
-    }, 200);
-  });
+  
 }]);
 

@@ -2,8 +2,9 @@
 	<form>
 		<input ng-model="email" type="email" placeholder="Email">
 		<input ng-model="password" type="password" placeholder="Password">
-		<button ng-click="createAccount(email, password)">Create Account</button>
+		<button ng-click="createAccount(email, password)" ng-disabled="currentUser">Create Account</button>
 		<p>{{loginMessage}}</p>
 	</form>
+	<p ng-show="currentUser">You are already logged in! <a ui-sref="main">Play Tic Tac Pro</a></p>
 	<a ui-sref="login">&lt;&lt; Back</a>
 </div>

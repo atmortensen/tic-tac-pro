@@ -10,13 +10,12 @@
   <title>Tic Tac Pro</title>
 
 </head>
-<body ng-controller="firebaseCtrl">
-{{firebaseUser}}
+<body>
+
 
 <ui-view></ui-view>
 
-
-
+<!-- build:js scripts/gulp.js -->
 <script src="https://www.gstatic.com/firebasejs/3.7.2/firebase.js"></script>
 <script type="text/javascript" src="js/firebaseConfig.js"></script>
 
@@ -30,6 +29,7 @@
 <script type="text/javascript" src="js/loginCtrl.js"></script>
 <script type="text/javascript" src="js/mainCtrl.js"></script>
 <script type="text/javascript" src="js/loginService.js"></script>
+<!-- endbuild -->
 
 </body>
 </html>
