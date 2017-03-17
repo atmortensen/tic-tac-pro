@@ -2,7 +2,8 @@
 var tictacpro = angular.module('tictacpro', ['ui.router', 'firebase']);
 
 // ROUTES
-tictacpro.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
+tictacpro.config(['$stateProvider', '$urlRouterProvider', 
+    function ($stateProvider, $urlRouterProvider) {
     $stateProvider
         .state('login',{
             url:'/login',
@@ -41,6 +42,15 @@ tictacpro.run(["$rootScope", "$state", function($rootScope, $state) {
     if (error === "AUTH_REQUIRED") {
       $state.go("login");
     }
+  });
+
+  $rootScope.$on("$stateChangeSuccess", function(event, toState, toParams, fromState, fromParams) {
+    setTimeout(function(){
+        console.log($rootScope.firebaseUser)
+        if($rootScope.firebaseUser && toState.controller === "loginCtrl"){
+            console.log('here')
+        }
+    }, 200);
   });
 }]);
 

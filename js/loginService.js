@@ -12,13 +12,13 @@ tictacpro.service('loginService', ['$firebaseAuth', '$q', function($firebaseAuth
 		var deferred = $q.defer();
 		if(!email || !password){
 			loginMessage = 'Invalid email or password!';
-			deferred.resolve();
+			deferred.resolve(false);
 		} else{
 			$firebaseAuth().$signInWithEmailAndPassword(email, password)
-			.then(deferred.resolve)
+			.then(() => deferred.resolve(true))
 			.catch(function(error) {
 	        	loginMessage = error.message;
-	        	deferred.resolve();
+	        	deferred.resolve(false);
 	      	});
 		}
 		return deferred.promise;
@@ -29,13 +29,13 @@ tictacpro.service('loginService', ['$firebaseAuth', '$q', function($firebaseAuth
 		var deferred = $q.defer();
 		if(!email || !password){
 			loginMessage = 'Invalid email or password!';
-			deferred.resolve();
+			deferred.resolve(false);
 		} else{
 			$firebaseAuth().$createUserWithEmailAndPassword(email, password)
-			.then(deferred.resolve)
+			.then(() => deferred.resolve(true))
 			.catch(function(error) {
 	        	loginMessage = error.message;
-	        	deferred.resolve();
+	        	deferred.resolve(false);
 	      	});
 		}
 		return deferred.promise;
@@ -45,10 +45,10 @@ tictacpro.service('loginService', ['$firebaseAuth', '$q', function($firebaseAuth
 	this.logout = function(){
 		var deferred = $q.defer();
 		$firebaseAuth().$signOut()
-		.then(deferred.resolve)
+		.then(() => deferred.resolve(true))
 		.catch(function(error) {
         	loginMessage = error.message;
-        	deferred.resolve();
+        	deferred.resolve(false);
       	});
 		return deferred.promise;
 	};
@@ -57,10 +57,10 @@ tictacpro.service('loginService', ['$firebaseAuth', '$q', function($firebaseAuth
 	this.guestLogin = function(){
 		var deferred = $q.defer();
 		$firebaseAuth().$signInAnonymously()
-		.then(deferred.resolve)
+		.then(() => deferred.resolve(true))
 		.catch(function(error) {
         	loginMessage = error.message;
-        	deferred.resolve();
+        	deferred.resolve(false);
       	});
 		return deferred.promise;
 	};
@@ -70,13 +70,16 @@ tictacpro.service('loginService', ['$firebaseAuth', '$q', function($firebaseAuth
 		var deferred = $q.defer();
 		if(!email){
 			loginMessage = 'Invalid email!';
-			deferred.resolve();
+			deferred.resolve(false);
 		} else{
 			$firebaseAuth().$sendPasswordResetEmail(email)
-			.then(deferred.resolve)
+			.then(() => {
+				loginMessage = 'Reset email sent successfully.'
+				deferred.resolve(true)
+			})
 			.catch(function(error) {
 	        	loginMessage = error.message;
-	        	deferred.resolve();
+	        	deferred.resolve(false);
 	      	});
 		}
 		return deferred.promise;

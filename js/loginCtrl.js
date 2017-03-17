@@ -8,31 +8,33 @@ tictacpro.controller('loginCtrl', ['$scope', 'loginService', '$state', function(
 
 	// LOGIN
 	$scope.login = function(email, password){
-		loginService.login(email, password).then(function(){
+		loginService.login(email, password).then(function(response){
 	  		$scope.getMessage();
-	  		$state.go('main');
+	  		if(response){ $state.go('main'); }
 	  	});
 	};
 
 	// GUEST LOGIN
 	$scope.guestLogin = function(){
-		loginService.guestLogin().then(function(){
+		loginService.guestLogin().then(function(response){
 	  		$scope.getMessage();
-	  		$state.go('main');
+	  		if(response){ $state.go('main'); }
 	  	});
 	};
 
 	// CREATE USER
 	$scope.createAccount = function(usename, password){
-		loginService.createAccount(usename, password).then(function(){
+		loginService.createAccount(usename, password).then(function(response){
 	  		$scope.getMessage();
-	  		$state.go('main');
+	  		if(response){ $state.go('main'); }
 	  	});
 	};
 
 	// FORGOT PASSWORD
 	$scope.forgotPassword = function(email){
-		loginService.forgotPassword(email).then($scope.getMessage);
+		loginService.forgotPassword(email).then(function(response){
+	  		$scope.getMessage();
+	  	});
 	};
 
 

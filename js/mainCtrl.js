@@ -1,5 +1,4 @@
-tictacpro.controller("mainCtrl", ["user", "$scope", "loginService", "$state", function(user, $scope, loginService, $state) {
-  $scope.user = user;
+tictacpro.controller("mainCtrl", ["$scope", "loginService", "$state", function($scope, loginService, $state) {
 
   // GET LOGIN MESSAGE 
   $scope.getMessage = function(){
@@ -8,9 +7,9 @@ tictacpro.controller("mainCtrl", ["user", "$scope", "loginService", "$state", fu
 
   // LOGOUT
   $scope.logout = function(){
-  	loginService.logout().then(function(){
+  	loginService.logout().then(function(response){
   		$scope.getMessage();
-  		$state.go('login');
+  		if(response){ $state.go('login'); }
   	});
   };
 
