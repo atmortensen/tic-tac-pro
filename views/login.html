@@ -1,0 +1,11 @@
+<div class="login">
+	<form>
+		<input ng-model="email" type="email" name="email" placeholder="Email">
+		<input ng-model="password" type="password" name="password" placeholder="Password">
+		<button ng-click="login(email, password)">Login</button>
+		<button ng-click="guestLogin()">Login as Guest</button>
+		<a ui-sref="createAccount">Create Account</a>
+		<a ui-sref="forgotPassword">Forgot Password</a>
+		<p>{{ loginMessage }}</p>
+	</form>
+</div>
