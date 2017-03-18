@@ -1,0 +1,10 @@
+<div>
+	<h3 class="userHead">Players Online</h3>
+	<ul>
+		<li ng-repeat="u in activeUsers" ng-if="u.uid!==currentUser.uid">
+			<span>{{ u.userName }}</span>
+			<span>5 Wins | 3 Losses</span>
+			<span><a>Challenge</a></span>
+		</li>
+	</ul>
+</div>

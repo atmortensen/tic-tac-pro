@@ -1,10 +1,19 @@
-<h1>Welcome {{ user.displayName }}!</h1>
-<p ng-hide="user.displayName">ERROR! PLEASE SET A USERNAME!</p>
+<div class="userInfo">
+	<div>
+		<h2>{{ currentUser.displayName }}</h2>
+		<p><a ui-sref="setUserName">Change Username</a></p>
+	</div>
+	<div>
+		<h3>5 Wins | 3 Losses</h3>
+		<p><a ng-show="currentUser.isAnonymous" ui-sref="linkAccount">Save your Record</a></p>
+	</div>
+	<div>
+		<a ng-click="logout()"><h2>Logout</h2></a>
+	</div>
+</div>
 
-<button ng-click="logout()">Logout</button>
-<a ui-sref="setUserName">Change Username</a>
-<a ng-show="user.isAnonymous" ui-sref="linkAccount">Create an account to save you scores</a>
+<div class="errorMessage">
+	<p ng-hide="currentUser.displayName">ERROR! PLEASE SET A USERNAME!</p>
+</div>
 
-<ul>
-	<li ng-repeat="user in activeUsers">{{ user.userName }}</li>
-</ul>
+<user-list class="activeUsers" active-users="activeUsers" current-user="currentUser"></user-list>

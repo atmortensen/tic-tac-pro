@@ -5,49 +5,50 @@ var tictacpro = angular.module('tictacpro', ['ui.router', 'firebase']);
 tictacpro.config(['$stateProvider', '$urlRouterProvider', 
     function ($stateProvider, $urlRouterProvider) {
     $stateProvider
-        .state('loginParent',{
-            templateUrl: "views/loginParent.html"
+        .state('mainTemplate',{
+            templateUrl: "views/mainTemplate.html"
         })
         .state('login',{
             url:'/login',
             templateUrl: "views/login.html",
             controller: 'loginCtrl',
-            parent: 'loginParent'
+            parent: 'mainTemplate'
         })
         .state('forgotPassword',{
             url:'/forgotPassword',
             templateUrl: "views/forgotPassword.html",
             controller: 'loginCtrl',
-            parent: 'loginParent'
+            parent: 'mainTemplate'
         })
         .state('createAccount',{
             url:'/createAccount',
             templateUrl: "views/createAccount.html",
             controller: 'loginCtrl',
-            parent: 'loginParent'
+            parent: 'mainTemplate'
         })
         .state('setUserName',{
             url:'/setUserName',
             templateUrl: "views/setUserName.html",
             controller: 'loginCtrl',
-            parent: 'loginParent'
+            parent: 'mainTemplate'
         })
         .state('emailSuccess',{
             url:'/emailSuccess',
             templateUrl: "views/emailSuccess.html",
             controller: 'loginCtrl',
-            parent: 'loginParent'
+            parent: 'mainTemplate'
         })
         .state('linkAccount',{
             url:'/linkAccount',
             templateUrl: "views/linkAccount.html",
             controller: 'loginCtrl',
-            parent: 'loginParent'
+            parent: 'mainTemplate'
         })
         .state('main',{
             url:'/',
             templateUrl: "views/main.html",
             controller: 'mainCtrl',
+            parent: 'mainTemplate',
             resolve: {
                 // FACTORY - MUST BE IN QUOTES TO PREVENT MINIFICATION
                 "user": ['$firebaseAuth', function($firebaseAuth) {
