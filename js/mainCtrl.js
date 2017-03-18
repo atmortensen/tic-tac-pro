@@ -1,19 +1,19 @@
-tictacpro.controller("mainCtrl", ["$scope", "$firebaseAuth", "loginService", "user", "$state", 
-	function($scope, $firebaseAuth, loginService, user, $state) {
+tictacpro.controller("mainCtrl", ["$scope", "$firebaseAuth", "activeUsersService", "loginService", "$state", "$interval", function($scope, $firebaseAuth, activeUsersService, loginService, $state, $interval) {
 
+	// GET CURRENT USER
 	$firebaseAuth().$onAuthStateChanged(function(firebaseUser) {
 	    $scope.user = firebaseUser;
+	    $scope.activeUsers = activeUsersService.checkUsers($scope.user.uid, $scope.user.displayName);
   	});
 
-	// GET LOGIN MESSAGE 
-	$scope.getMessage = function(){
-		$scope.loginMessage = loginService.getMessage();
-	};
+	// CHECK ACTIVE USERS
+	$interval(function(){
+		$scope.activeUsers = activeUsersService.checkUsers($scope.user.uid, $scope.user.displayName);
+	}, 1500);
 
 	// LOGOUT
 	$scope.logout = function(){
 		loginService.logout().then(function(response){
-			$scope.getMessage();
 			if(response){ $state.go('login'); }
 		});
 	};

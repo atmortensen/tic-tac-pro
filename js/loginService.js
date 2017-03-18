@@ -1,5 +1,5 @@
 // SERVICES
-tictacpro.service('loginService', ['$firebaseAuth', '$q', '$rootScope', function($firebaseAuth, $q, $rootScope){
+tictacpro.service('loginService', ['$firebaseAuth', '$q', function($firebaseAuth, $q){
 	
 	// SEND LOGIN MESSAGE TO CONTROLLER
 	var loginMessage = '';
@@ -65,7 +65,6 @@ tictacpro.service('loginService', ['$firebaseAuth', '$q', '$rootScope', function
 		$firebaseAuth().$signOut()
 		.then(() => {
 			deferred.resolve(true);
-			$rootScope.firebaseUser = '';
 		})
 		.catch(function(error) {
         	loginMessage = error.message;
@@ -124,10 +123,5 @@ tictacpro.service('loginService', ['$firebaseAuth', '$q', '$rootScope', function
 		}
 		return deferred.promise;
 	}
-
-
-	
-	// var firbaseDB = firebase.database().ref();
-	// console.log($firebaseObject(firbaseDB));
 
 }]);

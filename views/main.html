@@ -4,3 +4,7 @@
 <button ng-click="logout()">Logout</button>
 <a ui-sref="setUserName">Change Username</a>
 <a ng-show="user.isAnonymous" ui-sref="linkAccount">Create an account to save you scores</a>
+
+<ul>
+	<li ng-repeat="user in activeUsers">{{ user.userName }}</li>
+</ul>
