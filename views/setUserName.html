@@ -1,0 +1,7 @@
+<div class="errorMessage">
+	<p ng-show="loginMessage">{{ loginMessage }}</p>
+</div>
+<form>
+	<p><input ng-model="userName" type="text" placeholder="Username" autocomplete="off"></p>
+	<p><button ng-click="setUsername(currentUser, userName)">Set Username</button></p>
+</form>

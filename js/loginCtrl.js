@@ -17,7 +17,9 @@ tictacpro.controller('loginCtrl', ['$scope', '$firebaseAuth', 'loginService', '$
 	$scope.login = function(email, password){
 		loginService.login(email, password).then(function(response){
 	  		$scope.getMessage();
-	  		if(response){ $state.go('main'); }
+	  		var user = $firebaseAuth().$getAuth();
+	  		if(user.displayName && response){ $state.go('main'); }
+	  		else if(response){ $state.go('setUserName'); }
 	  	});
 	};
 
@@ -25,15 +27,19 @@ tictacpro.controller('loginCtrl', ['$scope', '$firebaseAuth', 'loginService', '$
 	$scope.guestLogin = function(){
 		loginService.guestLogin().then(function(response){
 	  		$scope.getMessage();
-	  		if(response){ $state.go('main'); }
+	  		var user = $firebaseAuth().$getAuth();
+	  		if(user.displayName && response){ $state.go('main'); }
+	  		else if(response){ $state.go('setUserName'); }
 	  	});
 	};
 
 	// CREATE USER
-	$scope.createAccount = function(usename, password){
-		loginService.createAccount(usename, password).then(function(response){
+	$scope.createAccount = function(email, password){
+		loginService.createAccount(email, password).then(function(response){
 	  		$scope.getMessage();
-	  		if(response){ $state.go('main'); }
+	  		var user = $firebaseAuth().$getAuth();
+	  		if(user.displayName && response){ $state.go('main'); }
+	  		else if(response){ $state.go('setUserName'); }
 	  	});
 	};
 
@@ -41,6 +47,15 @@ tictacpro.controller('loginCtrl', ['$scope', '$firebaseAuth', 'loginService', '$
 	$scope.forgotPassword = function(email){
 		loginService.forgotPassword(email).then(function(response){
 	  		$scope.getMessage();
+	  	});
+	};
+
+	// SET USERNAME 
+	$scope.setUsername = function(user, name){
+		loginService.setUsername(user, name).then(function(response){
+	  		$scope.getMessage();
+	  		var user = $firebaseAuth().$getAuth();
+	  		if(user.displayName && response){ $state.go('main'); }
 	  	});
 	};
 

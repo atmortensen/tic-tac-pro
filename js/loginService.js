@@ -88,6 +88,20 @@ tictacpro.service('loginService', ['$firebaseAuth', '$q', '$rootScope', function
 		return deferred.promise;
 	};
 
+	// SET USER NAME 
+	this.setUsername = function(user, name){
+		var deferred = $q.defer();
+		user.updateProfile({
+		    displayName: name,
+		}).then(function() {
+		    deferred.resolve(true)
+		}, function(error) {
+		    loginMessage = error.message;
+	        deferred.resolve(false);
+		});
+		return deferred.promise;
+	}
+
 
 	
 	// var firbaseDB = firebase.database().ref();

@@ -26,6 +26,12 @@ tictacpro.config(['$stateProvider', '$urlRouterProvider',
             controller: 'loginCtrl',
             parent: 'loginParent'
         })
+        .state('setUserName',{
+            url:'/setUserName',
+            templateUrl: "views/setUserName.html",
+            controller: 'loginCtrl',
+            parent: 'loginParent'
+        })
         .state('main',{
             url:'/',
             templateUrl: "views/main.html",

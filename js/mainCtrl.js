@@ -1,7 +1,9 @@
-tictacpro.controller("mainCtrl", ["$scope", "loginService", "user", "$state", 
-	function($scope, loginService, user, $state) {
+tictacpro.controller("mainCtrl", ["$scope", "$firebaseAuth", "loginService", "user", "$state", 
+	function($scope, $firebaseAuth, loginService, user, $state) {
 
-	$scope.user = user;
+	$firebaseAuth().$onAuthStateChanged(function(firebaseUser) {
+	    $scope.user = firebaseUser;
+  	});
 
 	// GET LOGIN MESSAGE 
 	$scope.getMessage = function(){
