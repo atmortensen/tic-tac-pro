@@ -32,6 +32,18 @@ tictacpro.config(['$stateProvider', '$urlRouterProvider',
             controller: 'loginCtrl',
             parent: 'loginParent'
         })
+        .state('emailSuccess',{
+            url:'/emailSuccess',
+            templateUrl: "views/emailSuccess.html",
+            controller: 'loginCtrl',
+            parent: 'loginParent'
+        })
+        .state('linkAccount',{
+            url:'/linkAccount',
+            templateUrl: "views/linkAccount.html",
+            controller: 'loginCtrl',
+            parent: 'loginParent'
+        })
         .state('main',{
             url:'/',
             templateUrl: "views/main.html",

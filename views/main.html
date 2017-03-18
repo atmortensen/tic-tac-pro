@@ -1,3 +1,6 @@
 <h1>Welcome {{ user.displayName }}!</h1>
+<p ng-hide="user.displayName">ERROR! PLEASE SET A USERNAME!</p>
 
 <button ng-click="logout()">Logout</button>
+<a ui-sref="setUserName">Change Username</a>
+<a ng-show="user.isAnonymous" ui-sref="linkAccount">Create an account to save you scores</a>

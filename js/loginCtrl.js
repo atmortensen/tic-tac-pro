@@ -43,10 +43,21 @@ tictacpro.controller('loginCtrl', ['$scope', '$firebaseAuth', 'loginService', '$
 	  	});
 	};
 
+	// LINK USER
+	$scope.linkAccount = function(user, email, password){
+		loginService.linkAccount(user, email, password).then(function(response){
+	  		$scope.getMessage();
+	  		var user = $firebaseAuth().$getAuth();
+	  		if(user.displayName && response){ $state.go('main'); }
+	  		else if(response){ $state.go('setUserName'); }
+	  	});
+	};
+
 	// FORGOT PASSWORD
 	$scope.forgotPassword = function(email){
 		loginService.forgotPassword(email).then(function(response){
 	  		$scope.getMessage();
+	  		if(response){ $state.go('emailSuccess'); }
 	  	});
 	};
 

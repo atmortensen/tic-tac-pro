@@ -4,4 +4,5 @@
 <form>
 	<p><input ng-model="userName" type="text" placeholder="Username" autocomplete="off"></p>
 	<p><button ng-click="setUsername(currentUser, userName)">Set Username</button></p>
+	<a ui-sref="main" ng-show="currentUser.displayName">Cancel</a>
 </form>
