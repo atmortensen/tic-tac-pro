@@ -49,6 +49,7 @@ a:hover {
 
 .wrapper h2, .wrapper .userInfo p, .wrapper h3 {
 	margin: 0;
+	line-height: 90%;
 }
 
 .wrapper form {
@@ -111,24 +112,25 @@ a:hover {
 	cursor: not-allowed;
 }
 
-.wrapper .activeUsers {
+.userList {
 	width: 100%;
 }
 
-.wrapper .userHead {
+.userList .userHead {
 	background: #d9d9d9;
 	margin-top: 10px; 
 	padding: 5px;
 }
 
-.activeUsers ul {
-	height: 150px;
+.userList ul {
+	min-height: 50px;
+	max-height: 150px;
 	margin: 0;
 	padding: 0;
 	overflow-y: auto;
 }
 
-.activeUsers li {
+.userList li {
 	list-style: none;
 	display: inline-flex;
 	width: calc(100% - 40px);
@@ -136,4 +138,24 @@ a:hover {
 	padding: 5px 10px;
 	margin: 0 10px;
 	border-bottom: 1px solid #d9d9d9;
+}
+
+.gameTable {
+	margin: auto;
+	margin-top: 10px;
+	border-collapse: collapse;
+	border-style: hidden;
+}
+
+.gameTable td {
+	border: 3px solid #262626;
+	height: 50px;
+	width: 50px;
+	cursor: pointer;
+	font-size: 45px;
+}
+
+.messageCenter {
+	height: 200px;
+	overflow-y: auto;
 }

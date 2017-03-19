@@ -1,10 +1,11 @@
-<div>
+<div class="userList">
 	<h3 class="userHead">Players Online</h3>
 	<ul>
+		<li ng-hide="activeUsers.length>1">No one else is logged in!</li>
 		<li ng-repeat="u in activeUsers" ng-if="u.uid!==currentUser.uid">
 			<span>{{ u.userName }}</span>
 			<span>5 Wins | 3 Losses</span>
-			<span><a>Challenge</a></span>
+			<span><a ng-click="newChallenge(currentUser, u)">Challenge</a></span>
 		</li>
 	</ul>
 </div>

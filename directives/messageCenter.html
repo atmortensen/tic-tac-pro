@@ -1,0 +1,13 @@
+<div class="messageCenter" id="messageCenter">
+	<div class="errorMessage">
+		<p ng-hide="currentUser.displayName"><a ui-sref="setUserName">ERROR! CLICK HERE TO SET A USERNAME!</a></p>
+	</div>
+	<p ng-repeat="challenge in myChallenges">
+		<span ng-if="challenge.playerX.uid !== currentUser.uid">
+			{{ challenge.playerX.userName }} sent you a challenge. <a>accept</a>
+		</span>
+		<span ng-if="challenge.playerX.uid === currentUser.uid">
+			You sent {{ challenge.playerX.userName }} a challenge.
+		</span>
+	</p>
+</div>

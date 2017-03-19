@@ -12,8 +12,8 @@
 	</div>
 </div>
 
-<div class="errorMessage">
-	<p ng-hide="currentUser.displayName">ERROR! PLEASE SET A USERNAME!</p>
-</div>
+<message-center></message-center>
 
-<user-list class="activeUsers" active-users="activeUsers" current-user="currentUser"></user-list>
+<game ng-show="inGame"></game>
+
+<user-list></user-list>
