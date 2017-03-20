@@ -1,28 +1,40 @@
 <div>
+	<div class="gameHead">
+		<div ng-class="{'yourMove': (XorO==='X' && move%2===0) || (XorO==='O' && move%2===1)}">
+			<h3>Your Turn</h3>
+			<h2>{{ XorO }}</h2>
+		</div>
+		<div></div>
+		<div ng-class="{'yourMove': (XorO==='X' && move%2===1) || (XorO==='O' && move%2===0)}">
+			<h3>{{ opponent.userName }}'s Turn</h3>
+			<h2>{{ opponent.XorO }}</h2>
+		</div>
+	</div>
 	<table class="gameTable">
 		<tr>
-			<td>x</td>
-			<td>o</td>
-			<td>x</td>
-			<td></td>
+			<td ng-click="squareClick(0)">{{ currentGame.game[0] }}</td>
+			<td ng-click="squareClick(1)">{{ currentGame.game[1] }}</td>
+			<td ng-click="squareClick(2)">{{ currentGame.game[2] }}</td>
+			<td ng-click="squareClick(3)">{{ currentGame.game[3] }}</td>
 		</tr>
 		<tr>
-			<td></td>
-			<td>o</td>
-			<td></td>
-			<td></td>
+			<td ng-click="squareClick(4)">{{ currentGame.game[4] }}</td>
+			<td ng-click="squareClick(5)">{{ currentGame.game[5] }}</td>
+			<td ng-click="squareClick(6)">{{ currentGame.game[6] }}</td>
+			<td ng-click="squareClick(7)">{{ currentGame.game[7] }}</td>
 		</tr>
 		<tr>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
+			<td ng-click="squareClick(8)">{{ currentGame.game[8] }}</td>
+			<td ng-click="squareClick(9)">{{ currentGame.game[9] }}</td>
+			<td ng-click="squareClick(10)">{{ currentGame.game[10] }}</td>
+			<td ng-click="squareClick(11)">{{ currentGame.game[11] }}</td>
 		</tr>
 		<tr>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
+			<td ng-click="squareClick(12)">{{ currentGame.game[12] }}</td>
+			<td ng-click="squareClick(13)">{{ currentGame.game[13] }}</td>
+			<td ng-click="squareClick(14)">{{ currentGame.game[14] }}</td>
+			<td ng-click="squareClick(15)">{{ currentGame.game[15] }}</td>
 		</tr>
 	</table>
+	<a ng-click="forfeit(currentGame)">Forfeit Game</a>
 </div>

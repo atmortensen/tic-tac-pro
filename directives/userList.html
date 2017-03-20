@@ -5,7 +5,8 @@
 		<li ng-repeat="u in activeUsers" ng-if="u.uid!==currentUser.uid">
 			<span>{{ u.userName }}</span>
 			<span>5 Wins | 3 Losses</span>
-			<span><a ng-click="newChallenge(currentUser, u)">Challenge</a></span>
+			<span ng-show="!u.inGame"><a ng-click="newChallenge(currentUser, u)">Challenge</a></span>
+			<span ng-show="u.inGame">In Game</span>
 		</li>
 	</ul>
 </div>

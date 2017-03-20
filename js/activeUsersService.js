@@ -21,7 +21,8 @@ tictacpro.service('activeUsersService', ['$firebaseArray',
 	    	activeUsers.$add({
 		    	uid: uid,
 		    	userName: userName,
-		    	timeStamp: now
+		    	timeStamp: now,
+		    	inGame: false
 	    	});
 	    }
 	    return activeUsers;

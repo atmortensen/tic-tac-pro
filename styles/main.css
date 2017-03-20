@@ -141,8 +141,7 @@ a:hover {
 }
 
 .gameTable {
-	margin: auto;
-	margin-top: 10px;
+	margin: 10px auto;
 	border-collapse: collapse;
 	border-style: hidden;
 }
@@ -158,4 +157,30 @@ a:hover {
 .messageCenter {
 	height: 200px;
 	overflow-y: auto;
+}
+
+@media screen and (max-width: 365px){
+	.statDivide {
+		opacity: 0;
+	}
+}
+
+.messageCenter .message {
+	margin: 0 10px;
+	border-bottom: 1px solid #d9d9d9;
+	padding: 5px;
+}
+
+.gameHead {
+	display: flex;
+	justify-content: space-between;
+	padding: 10px 10px 0 10px;
+}
+
+.gameHead h3 {
+	margin-bottom: 5px;
+}
+
+.yourMove {
+	color: #009933;
 }
