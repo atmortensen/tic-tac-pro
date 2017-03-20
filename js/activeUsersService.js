@@ -12,11 +12,12 @@ tictacpro.service('activeUsersService', ['$firebaseArray',
 	    	if(activeUsers[i].uid === uid && !updated){
 	    		activeUsers[i].timeStamp = now;
 	    		activeUsers[i].userName = userName;
-	    		activeUsers.$save(activeUsers[i]);
+	    		activeUsers.$save(activeUsers[i]).catch(e => console.log(e));
 	    		updated = true;
 	    	}
 	    	if(activeUsers[i].timeStamp < now-60000){
-	    		activeUsers.$remove(activeUsers[i]);
+	    		console.log('here')
+	    		activeUsers.$remove(activeUsers[i]).catch(e => console.log(e));
 	    	}
 	    }
 	    if(!updated){
@@ -25,7 +26,7 @@ tictacpro.service('activeUsersService', ['$firebaseArray',
 		    	userName: userName,
 		    	timeStamp: now,
 		    	inGame: false
-	    	});
+	    	}).catch(e => console.log(e));
 	    }
 	    return activeUsers;
 	}
