@@ -3,6 +3,8 @@ tictacpro.service('activeUsersService', ['$firebaseArray',
 
 	var activeUsersRef = firebase.database().ref().child("activeUsers").orderByChild('userName');
 	var activeUsers = $firebaseArray(activeUsersRef);
+	this.activeUsers = activeUsers;
+
 	this.checkUsers = function(uid, userName){
 	    var now = new Date().getTime();
 	    var updated = false;
@@ -13,7 +15,7 @@ tictacpro.service('activeUsersService', ['$firebaseArray',
 	    		activeUsers.$save(activeUsers[i]);
 	    		updated = true;
 	    	}
-	    	if(activeUsers[i].timeStamp < now-3000){
+	    	if(activeUsers[i].timeStamp < now-60000){
 	    		activeUsers.$remove(activeUsers[i]);
 	    	}
 	    }
@@ -27,5 +29,6 @@ tictacpro.service('activeUsersService', ['$firebaseArray',
 	    }
 	    return activeUsers;
 	}
+
 
 }]);

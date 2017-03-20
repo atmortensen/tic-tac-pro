@@ -4,7 +4,7 @@
 		<li ng-hide="activeUsers.length>1">No one else is logged in!</li>
 		<li ng-repeat="u in activeUsers" ng-if="u.uid!==currentUser.uid">
 			<span>{{ u.userName }}</span>
-			<span>5 Wins | 3 Losses</span>
+			<span ng-repeat="s in allStats" ng-if="u.uid===s.uid">{{ s.wins }} Wins | {{ s.losses }} Losses</span>
 			<span ng-show="!u.inGame"><a ng-click="newChallenge(currentUser, u)">Challenge</a></span>
 			<span ng-show="u.inGame">In Game</span>
 		</li>

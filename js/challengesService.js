@@ -1,12 +1,13 @@
-tictacpro.service('challengesService', ['$firebaseArray', 
-	function($firebaseArray){
+tictacpro.service('challengesService', ['$firebaseArray', 'activeUsersService', 
+	function($firebaseArray, activeUsersService){
 
 	var challengesRef = firebase.database().ref().child("challenges");
 	var challenges = $firebaseArray(challengesRef);
-	var activeUsersRef = firebase.database().ref().child("activeUsers").orderByChild('userName');
-	var activeUsers = $firebaseArray(activeUsersRef);
+	var activeUsers = activeUsersService.activeUsers;
 	this.challenges = challenges;
 	this.activeUsers = activeUsers;
+	var statsRef = firebase.database().ref().child("stats");
+	this.stats = $firebaseArray(statsRef);
 
 	this.findChallenges = function(currentUser, activeUsersLocal){
 		var now = new Date().getTime();
@@ -96,7 +97,7 @@ tictacpro.service('challengesService', ['$firebaseArray',
 		return currentGame;
 	}
 
-	this.forfeit = function(currentGame, currentUser){
+	this.forfeit = function(currentGame, currentUser, XorO){
 		currentGame.finished = true;
 		currentGame.forfeitedBy = currentUser.displayName;
 		challenges.$save(currentGame);
@@ -105,7 +106,40 @@ tictacpro.service('challengesService', ['$firebaseArray',
 				user.inGame = false;
 				activeUsers.$save(user).catch(e => console.log(e));
 			}
-		})
+		});
+		if(XorO==='X'){
+			var opponent = currentGame.playerO.uid;
+		} else{
+			var opponent = currentGame.playerX.uid;
+		}
+		var savedWinner = false;
+		var savedLooser = false;
+		this.stats.forEach(stat => {
+			if(stat.uid===currentUser.uid){
+				stat.losses++;
+				this.stats.$save(stat);
+				savedWinner = true;
+			}
+			if(stat.uid===opponent){
+				stat.wins++;
+				this.stats.$save(stat).catch(e => console.log(e));
+				savedLooser = true;
+			}
+		});
+		if(!savedWinner){
+			this.stats.$add({
+				uid: currentUser.uid,
+				losses: 1,
+				wins: 0
+			})
+		}
+		if(!savedLooser){
+			this.stats.$add({
+				uid: opponent,
+				losses: 0,
+				wins: 1
+			}).catch(e => console.log(e));
+		}
 	}
 
 	this.endGame = function(currentGame, currentUser){
@@ -118,5 +152,6 @@ tictacpro.service('challengesService', ['$firebaseArray',
 			}
 		})
 	}
+
 
 }]);

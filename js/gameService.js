@@ -4,6 +4,8 @@ tictacpro.service('gameService', ['$firebaseArray', 'challengesService',
 	var challenges = challengesService.challenges;
 	var self = this;
 	this.freeze = false;
+	var stats = challengesService.stats;
+
 
 	this.getMove = function(currentGame){
 		if(currentGame){
@@ -44,6 +46,39 @@ tictacpro.service('gameService', ['$firebaseArray', 'challengesService',
 					(g[0]===XorO && g[5]===XorO && g[10]===XorO && g[15]===XorO) ||
 					(g[3]===XorO && g[7]===XorO && g[9]===XorO && g[12]===XorO)){
 					self.freeze = true;
+					if(XorO==='X'){
+						var opponent = currentGame.playerO.uid;
+					} else{
+						var opponent = currentGame.playerX.uid;
+					}
+					var savedWinner = false;
+					var savedLooser = false;
+					stats.forEach(stat => {
+						if(stat.uid===currentUser.uid){
+							stat.wins++;
+							stats.$save(stat);
+							savedWinner = true;
+						}
+						if(stat.uid===opponent){
+							stat.losses++;
+							stats.$save(stat).catch(e => console.log(e));
+							savedLooser = true;
+						}
+					});
+					if(!savedWinner){
+						stats.$add({
+							uid: currentUser.uid,
+							losses: 0,
+							wins: 1
+						})
+					}
+					if(!savedLooser){
+						stats.$add({
+							uid: opponent,
+							losses: 1,
+							wins: 0
+						}).catch(e => console.log(e));
+					}
 					currentGame.wonBy = currentUser.displayName;
 					challenges.$save(currentGame);
 				} else if(move===15){

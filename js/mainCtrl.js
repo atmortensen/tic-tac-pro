@@ -48,7 +48,12 @@ tictacpro.controller("mainCtrl", ["$scope", "$firebaseAuth", "activeUsersService
 	    // GET MOVE #
 	    $scope.move = gameService.getMove($scope.currentGame);
 
-	}, 1500);
+	    $scope.stats = challengesService.stats.filter(stat => stat.uid===$scope.currentUser.uid)[0];
+	    $scope.allStats = challengesService.stats;
+
+	    
+
+	}, 500);
 
 	// MAKE NEW CHALLENGE
 	$scope.newChallenge = function(currentUser, challengedUser){
@@ -78,8 +83,8 @@ tictacpro.controller("mainCtrl", ["$scope", "$firebaseAuth", "activeUsersService
 
 	// FORFEIT GAME
 	$scope.forfeit = function(currentGame){
-		challengesService.forfeit(currentGame, $scope.currentUser);
 		$scope.currentGame = null;
+		challengesService.forfeit(currentGame, $scope.currentUser, $scope.XorO);
 	}
 
 	// SQUARE CLICK 

@@ -4,14 +4,13 @@
 		<p><a ui-sref="setUserName">Change Username</a></p>
 	</div>
 	<div style="text-align: center">
-		<h3>5&nbsp;Wins <span class="statDivide">|</span> 3&nbsp;Losses</h3>
+		<h3>{{ stats.wins || 0 }}&nbsp;Wins <span class="statDivide">|</span> {{ stats.losses || 0 }}&nbsp;Losses</h3>
 		<p><a ng-show="currentUser.isAnonymous" ui-sref="linkAccount">Save Stats</a></p>
 	</div>
 	<div>
 		<a ng-click="logout()"><h2>Logout</h2></a>
 	</div>
 </div>
-
 <message-center ng-hide="currentGame"></message-center>
 
 <game ng-show="currentGame"></game>
