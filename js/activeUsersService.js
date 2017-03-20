@@ -16,7 +16,6 @@ tictacpro.service('activeUsersService', ['$firebaseArray',
 	    		updated = true;
 	    	}
 	    	if(activeUsers[i].timeStamp < now-60000){
-	    		console.log('here')
 	    		activeUsers.$remove(activeUsers[i]).catch(e => console.log(e));
 	    	}
 	    }
