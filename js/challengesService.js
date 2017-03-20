@@ -5,6 +5,7 @@ tictacpro.service('challengesService', ['$firebaseArray', 'activeUsersService',
 	var challenges = $firebaseArray(challengesRef);
 	var activeUsers = activeUsersService.activeUsers;
 	this.challenges = challenges;
+	this.activeUsers = activeUsers;
 	var statsRef = firebase.database().ref().child("stats");
 	this.stats = $firebaseArray(statsRef);
 
@@ -73,12 +74,8 @@ tictacpro.service('challengesService', ['$firebaseArray', 'activeUsersService',
 
 	this.getGame = function(currentUser, currentGame){
 		if(!currentGame){
-			activeUsers.forEach(user => {
-				if(currentUser.uid===user.uid){
-					user.inGame = false;
-					activeUsers.$save(user).catch(e => console.log(e));
-				}
-			});
+			currentUser.inGame = false;
+			activeUsers.$save(currentUser);
 		}
 		var currentGame = null;
 		challenges.forEach(challenge => {
@@ -154,58 +151,6 @@ tictacpro.service('challengesService', ['$firebaseArray', 'activeUsersService',
 				activeUsers.$save(user).catch(e => console.log(e));
 			}
 		})
-	}
-
-	this.forcedForfeit = function(currentGame, currentUser, XorO){
-		currentGame.finished = true;
-		if(XorO==='X'){
-			var opponent = currentGame.playerO.uid;
-			var opponentName = currentGame.playerO.userName;
-		} else{
-			var opponent = currentGame.playerX.uid;
-			var opponentName = currentGame.playerX.userName;
-		}
-		currentGame.forfeitedBy = opponentName;
-		challenges.$save(currentGame).catch(e => console.log(e));
-		activeUsers.forEach(user =>{
-			if(user.uid===currentGame.playerO.uid || user.uid===currentGame.playerX.uid){
-				user.inGame = false;
-				activeUsers.$save(user).catch(e => console.log(e));
-			}
-		});
-		if(XorO==='X'){
-			var opponent = currentGame.playerO.uid;
-		} else{
-			var opponent = currentGame.playerX.uid;
-		}
-		var savedWinner = false;
-		var savedLooser = false;
-		this.stats.forEach(stat => {
-			if(stat.uid===currentUser.uid){
-				stat.wins++;
-				this.stats.$save(stat);
-				savedWinner = true;
-			}
-			if(stat.uid===opponent){
-				stat.losses++;
-				this.stats.$save(stat).catch(e => console.log(e));
-				savedLooser = true;
-			}
-		});
-		if(!savedWinner){
-			this.stats.$add({
-				uid: currentUser.uid,
-				losses: 0,
-				wins: 1
-			})
-		}
-		if(!savedLooser){
-			this.stats.$add({
-				uid: opponent,
-				losses: 1,
-				wins: 0
-			}).catch(e => console.log(e));
-		}
 	}
 
 

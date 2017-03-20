@@ -51,28 +51,6 @@ tictacpro.controller("mainCtrl", ["$scope", "$firebaseAuth", "activeUsersService
 	    $scope.stats = challengesService.stats.filter(stat => stat.uid===$scope.currentUser.uid)[0];
 	    $scope.allStats = challengesService.stats;
 
-	    // CHECK IF OPPONENT LEFT
-	    if($scope.currentGame){
-	    	if($scope.XorO==='X'){
-	    		var opponentXorO = 'playerO';
-	    	} else {
-	    		var opponentXorO = 'playerX';
-	    	}
-	    	var searchForOpponent = $scope.activeUsers.filter(user => user.uid===$scope.currentGame[opponentXorO].uid)
-	    	var forcedForfeit = function(currentGame){
-	    		$scope.currentGame = null;
-	    		challengesService.forcedForfeit(currentGame, $scope.currentUser, $scope.XorO);
-	    	}
-	    	if(searchForOpponent.length===0){
-	    		forcedForfeit($scope.currentGame);
-	    	}
-	    }
-
-	    if($scope.currentGame){
-	    	if($scope.currentGame.wonBy || $scope.currentGame.forfeitedBy){
-	    		$scope.currentGame = null;
-	    	}
-	    }
 	    
 
 	}, 500);
