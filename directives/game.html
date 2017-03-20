@@ -1,11 +1,14 @@
 <div>
 	<div class="gameHead">
-		<div ng-class="{'yourMove': (XorO==='X' && move%2===0) || (XorO==='O' && move%2===1)}">
+		<div class="third" ng-class="{'yourMove': ((XorO==='X' && move%2===0) || (XorO==='O' && move%2===1)) && !currentGame.wonBy}">
 			<h3>Your Turn</h3>
 			<h2>{{ XorO }}</h2>
 		</div>
-		<div></div>
-		<div ng-class="{'yourMove': (XorO==='X' && move%2===1) || (XorO==='O' && move%2===0)}">
+		<div class="third">
+		<h2 ng-show="currentGame.wonBy && currentGame.wonBy!=='Tie'">{{ currentGame.wonBy }} Won!</h2>
+		<h2 ng-show="currentGame.wonBy && currentGame.wonBy==='Tie'">{{ currentGame.wonBy }}!</h2>
+		</div>
+		<div class="third" ng-class="{'yourMove': ((XorO==='X' && move%2===1) || (XorO==='O' && move%2===0)) && !currentGame.wonBy}">
 			<h3>{{ opponent.userName }}'s Turn</h3>
 			<h2>{{ opponent.XorO }}</h2>
 		</div>
@@ -36,5 +39,6 @@
 			<td ng-click="squareClick(15)">{{ currentGame.game[15] }}</td>
 		</tr>
 	</table>
-	<a ng-click="forfeit(currentGame)">Forfeit Game</a>
+	<a ng-hide="currentGame.wonBy" ng-click="forfeit(currentGame)">Forfeit Game</a>
+	<a ng-show="currentGame.wonBy" ng-click="endGame()">Done</a>
 </div>

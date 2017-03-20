@@ -106,7 +106,17 @@ tictacpro.service('challengesService', ['$firebaseArray',
 				activeUsers.$save(user).catch(e => console.log(e));
 			}
 		})
+	}
 
+	this.endGame = function(currentGame, currentUser){
+		currentGame.finished = true;
+		challenges.$save(currentGame);
+		activeUsers.forEach(user =>{
+			if(user.uid===currentGame.playerO.uid || user.uid===currentGame.playerX.uid){
+				user.inGame = false;
+				activeUsers.$save(user).catch(e => console.log(e));
+			}
+		})
 	}
 
 }]);

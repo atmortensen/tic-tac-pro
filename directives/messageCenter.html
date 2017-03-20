@@ -9,6 +9,8 @@
 			<a ng-show="challenge.challengerAvailable && !challenge.started" ng-click="acceptChallenge(challenge)">Accept.</a>
 			<span ng-show="challenge.started">Game played.</span>
 			<span ng-show="challenge.forfeitedBy">{{challenge.forfeitedBy}} forfeited.</span>
+			<span ng-show="challenge.wonBy && challenge.wonBy!=='Tie'">{{challenge.wonBy}} won.</span>
+			<span ng-show="challenge.wonBy && challenge.wonBy==='Tie'">{{challenge.wonBy}}.</span>
 			<span ng-hide="challenge.challengerAvailable || challenge.started">User unavailable.</span>
 		</span>
 		<span ng-if="challenge.playerX.uid === currentUser.uid">
@@ -16,6 +18,8 @@
 			<span ng-show="challenge.started">Game played.</span>
 			<span ng-show="!challenge.started">{{ challenge.playerO.userName }} hasn't accepted.</span>
 			<span ng-show="challenge.forfeitedBy">{{challenge.forfeitedBy}} forfeited.</span>
+			<span ng-show="challenge.wonBy && challenge.wonBy!=='Tie'">{{challenge.wonBy}} won.</span>
+			<span ng-show="challenge.wonBy && challenge.wonBy==='Tie'">{{challenge.wonBy}}.</span>
 		</span>
 	</p>
 </div>
