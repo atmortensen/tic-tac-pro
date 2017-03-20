@@ -74,6 +74,12 @@ tictacpro.service('challengesService', ['$firebaseArray', 'activeUsersService',
 
 	this.getGame = function(currentUser, currentGame){
 		if(!currentGame){
+			activeUsers.forEach(user => {
+				if(currentUser.uid===user.uid){
+					user.inGame = false;
+					activeUsers.$save(user).catch(e => console.log(e));
+				}
+			})
 			currentUser.inGame = false;
 			activeUsers.$save(currentUser);
 		}

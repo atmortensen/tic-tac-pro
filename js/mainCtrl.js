@@ -96,6 +96,7 @@ tictacpro.controller("mainCtrl", ["$scope", "$firebaseAuth", "activeUsersService
 
 	$scope.endGame = function(){
 		gameService.freeze = false;
+		gameService.squareClick($scope.currentGame, 0, $scope.XorO, $scope.currentUser);
 		challengesService.endGame($scope.currentGame, $scope.currentUser);
 	}
 

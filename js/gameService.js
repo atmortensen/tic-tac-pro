@@ -44,7 +44,7 @@ tictacpro.service('gameService', ['$firebaseArray', 'challengesService',
 					(g[2]===XorO && g[6]===XorO && g[10]===XorO && g[14]===XorO) ||
 					(g[3]===XorO && g[7]===XorO && g[11]===XorO && g[15]===XorO) ||
 					(g[0]===XorO && g[5]===XorO && g[10]===XorO && g[15]===XorO) ||
-					(g[3]===XorO && g[7]===XorO && g[9]===XorO && g[12]===XorO)){
+					(g[3]===XorO && g[6]===XorO && g[9]===XorO && g[12]===XorO)){
 					self.freeze = true;
 					if(XorO==='X'){
 						var opponent = currentGame.playerO.uid;
